@@ -3,6 +3,7 @@
 package clip
 
 import (
+	"errors"
 	"syscall"
 	"time"
 	"unsafe"
@@ -45,6 +46,10 @@ func waitOpenClipboard() error {
 	return err
 }
 
+func readAllBytes() ([]byte, error) {
+	return []byte{}, errors.New("readAllBytes is not supported on the windows")
+}
+
 func readAll() (string, error) {
 	err := waitOpenClipboard()
 	if err != nil {
@@ -70,6 +75,10 @@ func readAll() (string, error) {
 	}
 
 	return text, nil
+}
+
+func writeAllBytes(_ []byte) error {
+	return errors.New("writeAllBytes is not supported on the windows")
 }
 
 func writeAll(text string) error {

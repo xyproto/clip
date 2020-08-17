@@ -32,7 +32,4 @@ func main() {
 			err = clip.WriteAll("")
 		}
 	}
-	if err != nil {
-		os.Exit(1)
-	}
 }

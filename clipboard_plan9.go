@@ -7,9 +7,14 @@
 package clipboard
 
 import (
+	"errors"
 	"io/ioutil"
 	"os"
 )
+
+func readAllBytes() ([]byte, error) {
+	return []byte{}, errors.New("readAllBytes is not supported on the plan9")
+}
 
 func readAll() (string, error) {
 	f, err := os.Open("/dev/snarf")
@@ -24,6 +29,10 @@ func readAll() (string, error) {
 	}
 
 	return string(str), nil
+}
+
+func writeAllBytes(_ []byte) error {
+	return errors.New("writeAllBytes is not supported on the plan9")
 }
 
 func writeAll(text string) error {

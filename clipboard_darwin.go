@@ -3,6 +3,7 @@
 package clip
 
 import (
+	"errors"
 	"os/exec"
 )
 
@@ -19,6 +20,10 @@ func getCopyCommand() *exec.Cmd {
 	return exec.Command(copyCmdArgs)
 }
 
+func readAllBytes() ([]byte, error) {
+	return []byte{}, errors.New("readAllBytes is not supported on the darwin")
+}
+
 func readAll() (string, error) {
 	pasteCmd := getPasteCommand()
 	out, err := pasteCmd.Output()
@@ -26,6 +31,10 @@ func readAll() (string, error) {
 		return "", err
 	}
 	return string(out), nil
+}
+
+func writeAllBytes(_ []byte) error {
+	return errors.New("writeAllBytes is not supported on the darwin")
 }
 
 func writeAll(text string) error {
